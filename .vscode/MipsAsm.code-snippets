@@ -1,0 +1,414 @@
+{
+	// Place your VSCode workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"add": {
+		"scope": "mips",
+		"prefix": "add",
+		"body": "add\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = $2 + $3\n",
+		"description": "add"
+	},
+	"addi": {
+		"scope": "mips",
+		"prefix": "addi",
+		"body": "addi\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 + $3\n",
+		"description": "add immediate"
+	},
+	"allocate": {
+		"scope": "mips",
+		"prefix": "allocateMemory",
+		"body": "# Allocate ${1:16} of bytes in memory\naddi\t\\$a0, \\$0, ${1:16}\t\t# ${1:16} bytes to be allocated\naddi\t\\$v0, \\$0, 9\t\t# system call #9 - allocate memory\nsyscall\t\t\t\t\t# execute",
+		"description": "System call 9: Allocate memory."
+	},
+	"and": {
+		"scope": "mips",
+		"prefix": "and",
+		"body": "and\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = $2 & $3\n",
+		"description": "and"
+	},
+	"andi": {
+		"scope": "mips",
+		"prefix": "andi",
+		"body": "andi\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 & $3\n",
+		"description": "and immediate"
+	},
+	"b": {
+		"scope": "mips",
+		"prefix": "b",
+		"body": "b\t\t${1:target}\t\t\t# branch to $1\n",
+		"description": "branch unconditional"
+	},
+	"beq": {
+		"scope": "mips",
+		"prefix": "beq",
+		"body": "beq\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 == $2 then goto $3\n",
+		"description": "branch if equal"
+	},
+	"bge": {
+		"scope": "mips",
+		"prefix": "bge",
+		"body": "bge\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 >= $2 then goto $3\n",
+		"description": "branch if greater then or equal"
+	},
+	"bgt": {
+		"scope": "mips",
+		"prefix": "bgt",
+		"body": "bgt\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 > $2 then goto $3\n",
+		"description": "branch if greater then"
+	},
+	"ble": {
+		"scope": "mips",
+		"prefix": "ble",
+		"body": "ble\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 <= $2 then goto $3\n",
+		"description": "branch if less then or equal"
+	},
+	"blt": {
+		"scope": "mips",
+		"prefix": "blt",
+		"body": "blt\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 < $2 then goto $3\n",
+		"description": "branch if less then"
+	},
+	"bne": {
+		"scope": "mips",
+		"prefix": "bne",
+		"body": "bne\t\t${1:\\$t0}, ${2:\\$t1}, ${3:target}\t# if $1 != $2 then goto $3\n",
+		"description": "branch if not equal"
+	},
+	"div": {
+		"scope": "mips",
+		"prefix": "div",
+		"body": "div\t\t${1:\\$t0}, ${2:\\$t1}\t\t\t# $1 / $2\nmflo\t${3:\\$t2}\t\t\t\t\t# $3 = floor($1 / $2) \nmfhi\t${4:\\$t3}\t\t\t\t\t# $4 = $1 % $2 \n",
+		"description": "divide"
+	},
+	"exit": {
+		"scope": "mips",
+		"prefix": "exit",
+		"body": "addi\t\\$v0, \\$0, 10\t\t# System call 10 - Exit\nsyscall\t\t\t\t\t# execute",
+		"description": "System call 10: Exit."
+	},
+	"inputDouble": {
+		"scope": "mips",
+		"prefix": "inputDouble",
+		"body": "addi\t\t\\$v0, \\$0, 7\t\t# system call #7 - input double\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 7: Read Double"
+	},
+	"inputFloat": {
+		"scope": "mips",
+		"prefix": "inputFloat",
+		"body": "addi\t\t\\$v0, \\$0, 6\t\t# system call #6 - input float\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 6: Read float"
+	},
+	"inputInt": {
+		"scope": "mips",
+		"prefix": "inputInt",
+		"body": "addi\t\t\\$v0, \\$0, 5\t\t# system call #5 - input int\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 5: Read int"
+	},
+	"inputString": {
+		"scope": "mips",
+		"prefix": "inputString",
+		"body": "addi\t\t\\$v0, \\$0, 8\t\t# system call #8 - input string\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 8: input string"
+	},
+	"jal": {
+		"scope": "mips",
+		"prefix": "jal",
+		"body": "jal\t\t${1:target}\t\t\t\t# jump to $1 and save position to \\$ra\n",
+		"description": "jump and link"
+	},
+	"jr": {
+		"scope": "mips",
+		"prefix": "jr",
+		"body": "jr\t\t${1:\\$ra}\t\t\t\t\t# jump to $1\n",
+		"description": "jump register"
+	},
+	"j": {
+		"scope": "mips",
+		"prefix": "j",
+		"body": "j\t\t${1:target}\t\t\t\t# jump to $1\n",
+		"description": "jump"
+	},
+	"la": {
+		"scope": "mips",
+		"prefix": "la",
+		"body": "la\t\t${1:\\$t1}, ${2:var1}\t\t# \n",
+		"description": "load address"
+	},
+	"lb": {
+		"scope": "mips",
+		"prefix": "lb",
+		"body": "lb\t\t${1:\\$t1}, ${2:${3:0}(${4:\\$s1})}\t\t# \n",
+		"description": "load byte"
+	},
+	"li": {
+		"scope": "mips",
+		"prefix": "li",
+		"body": "li\t\t${1:\\$t1}, $2\t\t# $1 = $2\n",
+		"description": "load immediate"
+	},
+	"lw": {
+		"scope": "mips",
+		"prefix": "lw",
+		"body": "lw\t\t${1:\\$t1}, ${2:${3:0}(${4:\\$s1})}\t\t# \n",
+		"description": "load word"
+	},
+	"move": {
+		"scope": "mips",
+		"prefix": "move",
+		"body": "move \t${1:\\$t0}, ${2:\\$t1}\t\t# $1 = $2",
+		"description": "move"
+	},
+	"mult": {
+		"scope": "mips",
+		"prefix": "mult",
+		"body": "mult\t${1:\\$t0}, ${2:\\$t1}\t\t\t# $1 * $2 = Hi and Lo registers\nmflo\t${3:\\$t2}\t\t\t\t\t# copy Lo to $3\n",
+		"description": "multiply"
+	},
+	"nor": {
+		"scope": "mips",
+		"prefix": "nor",
+		"body": "nor\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = ~($2 | $3)\n",
+		"description": "nor"
+	},
+	"or": {
+		"scope": "mips",
+		"prefix": "or",
+		"body": "or\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = $2 | $3\n",
+		"description": "or"
+	},
+	"ori": {
+		"scope": "mips",
+		"prefix": "ori",
+		"body": "ori\t\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 | $3\n",
+		"description": "or immediate"
+	},
+	"printDouble": {
+		"scope": "mips",
+		"prefix": "printDouble",
+		"body": "addi\t\t\\$v0, \\$0, 3\t\t# system call #3 - print double\nmov.d\t\t\\$f12, ${1:variable}\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 3: print double"
+	},
+	"printFloat": {
+		"scope": "mips",
+		"prefix": "printFloat",
+		"body": "addi\t\t\\$v0, \\$0, 2\t\t# system call #2 - print float\nmov.s\t\t\\$f12, ${1:variable}\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 2: print float"
+	},
+	"printInt": {
+		"scope": "mips",
+		"prefix": "printInt",
+		"body": "addi\t\t\\$v0, \\$0, 1\t\t# system call #1 - print int\nadd\t\t\\$a0, \\$0, ${1:variable}\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 1: print int"
+	},
+	"printString": {
+		"scope": "mips",
+		"prefix": "printString",
+		"body": "addi\t\t\\$v0, \\$0, 4\t\t# system call #4 - print string\nla\t\t\\$a0, ${1:string}\nsyscall\t\t\t\t\t\t# execute",
+		"description": "System call 4: print string"
+	},
+	"sb": {
+		"scope": "mips",
+		"prefix": "sb",
+		"body": "sb\t\t${1:\\$t1}, ${2:${3:0}(${4:\\$s1})}\t\t# \n",
+		"description": "store byte"
+	},
+	"sll": {
+		"scope": "mips",
+		"prefix": "sll",
+		"body": "sll\t\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 << $3\n",
+		"description": "shift left"
+	},
+	"slt": {
+		"scope": "mips",
+		"prefix": "slt",
+		"body": "slt\t\t${1:\\$t0}, ${2:\\$s0}, ${3:\\$s1}\t\t# $1 = ($2 < $3) ? 1 : 0\n",
+		"description": "set on less than"
+	},
+	"slti": {
+		"scope": "mips",
+		"prefix": "slti",
+		"body": "slti\t${1:\\$t0}, ${2:\\$s0}, ${3:0}\t\t\t# $1 = ($2 < $3) ? 1 : 0\n",
+		"description": "set on less than immediate"
+	},
+	"srl": {
+		"scope": "mips",
+		"prefix": "srl",
+		"body": "srl\t\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 >> $3\n",
+		"description": "shift right"
+	},
+	"string": {
+		"scope": "mips",
+		"prefix": "string",
+		"body": "${1:string}: .asciiz \"$2\"",
+		"description": "string var"
+	},
+	"sub": {
+		"scope": "mips",
+		"prefix": "sub",
+		"body": "sub\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = $2 - $3\n",
+		"description": "subtract"
+	},
+	"subi": {
+		"scope": "mips",
+		"prefix": "subi",
+		"body": "subi\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 - $3\n",
+		"description": "subtract immediate"
+	},
+	"sw": {
+		"scope": "mips",
+		"prefix": "sw",
+		"body": "sw\t\t${1:\\$t1}, ${2:${3:0}(${4:\\$s1})}\t\t# \n",
+		"description": "store word"
+	},
+	"var": {
+		"scope": "mips",
+		"prefix": "var",
+		"body": "${1:var}: .${2:word} $3",
+		"description": "variable"
+	},
+	"xor": {
+		"scope": "mips",
+		"prefix": "xor",
+		"body": "xor\t\t${1:\\$t0}, ${2:\\$t1}, ${3:\\$t2}\t\t# $1 = $2 ^ $3\n",
+		"description": "xor"
+	},
+	"xori": {
+		"scope": "mips",
+		"prefix": "xori",
+		"body": "xori\t${1:\\$t0}, ${2:\\$t1}, ${3:0}\t\t\t# $1 = $2 ^ $3\n",
+		"description": "xor immediate"
+	},
+	"If else statement body": {
+		"prefix": "ifelbody",
+		"body": [
+			"${2:# Your code #}",
+			"j\t$1EndIf",
+			"$1MainIf:",
+			"${3:# Your code #}",
+			"$1EndIf:"
+		],
+		"description": "If else statement body"
+	},
+	//-------------------------------------------------------------------
+	// "word": {
+	// 	"prefix": ".word",
+	// 	"body": ".word ${1:1}\n",
+	// 	"description": "Word",
+	// 	"scope": "source.mips"
+	// },
+	// "add": {
+	// 	"prefix": "add",
+	// 	"body": "add $${1:d}, $${2:s}, $${3:t} ; $$1 = $$2 + $$3\n",
+	// 	"description": "Add",
+	// 	"scope": "source.mips"
+	// },
+	// "sub": {
+	// 	"prefix": "sub",
+	// 	"body": "sub $${1:d}, $${2:s}, $${3:t} ; $$1 = $$2 - $$3\n",
+	// 	"description": "Subtract",
+	// 	"scope": "source.mips"
+	// },
+	// "mult": {
+	// 	"prefix": "mult",
+	// 	"body": "mult $${1:s}, $${2:t} ; hi:lo = $$1 * $$2\n",
+	// 	"description": "Multiply",
+	// 	"scope": "source.mips"
+	// },
+	// "multu": {
+	// 	"prefix": "multu",
+	// 	"body": "multu $${1:s}, $${2:t} ; hi:lo = $$1 * $$2\n",
+	// 	"description": "Multiply Unsigned",
+	// 	"scope": "source.mips"
+	// },
+	// "div": {
+	// 	"prefix": "div",
+	// 	"body": "div $${1:s}, $${2:t} ; lo = $$1 / $$2, hi = $$1 % $$2\n",
+	// 	"description": "Divide",
+	// 	"scope": "source.mips"
+	// },
+	// "divu": {
+	// 	"prefix": "divu",
+	// 	"body": "divu $${1:s}, $${2:t} ; lo = $$1 / $$2, hi = $$1 % $$2\n",
+	// 	"description": "Divide Unsigned",
+	// 	"scope": "source.mips"
+	// },
+	// "mfhi": {
+	// 	"prefix": "mfhi",
+	// 	"body": "mfhi $${1:d} ; $$1 =  hi\n",
+	// 	"description": "Move From High/Remainder",
+	// 	"scope": "source.mips"
+	// },
+	// "mflo": {
+	// 	"prefix": "mflo",
+	// 	"body": "mflo $${1:d} ; $$1 =  lo\n",
+	// 	"description": "Move From Low/Quotient",
+	// 	"scope": "source.mips"
+	// },
+	// "lis": {
+	// 	"prefix": "lis",
+	// 	"body": "lis $${1:d} ; $$1 = $2 \n.word ${2:v}",
+	// 	"description": "Load Immediate and Skip",
+	// 	"scope": "source.mips"
+	// },
+	// "lw": {
+	// 	"prefix": "lw",
+	// 	"body": "lw $${1:t}, ${2:i}($${3:s}) ; $$1 = MEM [$$3 + $2]\n",
+	// 	"description": "Load Word",
+	// 	"scope": "source.mips"
+	// },
+	// "sw": {
+	// 	"prefix": "sw",
+	// 	"body": "sw $${1:t}, ${2:i}($${3:s}) ; MEM [$$3 + $2] = $$1 \n",
+	// 	"description": "Store Word",
+	// 	"scope": "source.mips"
+	// },
+	// "slt": {
+	// 	"prefix": "slt",
+	// 	"body": "slt $${1:d}, $${2:s}, $${3:t} ; $$1 = 1 if $$2 < $$3; 0 otherwise\n",
+	// 	"description": "Set Less Than",
+	// 	"scope": "source.mips"
+	// },
+	// "sltu": {
+	// 	"prefix": "sltu",
+	// 	"body": "sltu $${1:d}, $${2:s}, $${3:t} ; $$1 = 1 if $$2 < $$3; 0 otherwise\n",
+	// 	"description": "Set Less Than Unsigned",
+	// 	"scope": "source.mips"
+	// },
+	// "beq": {
+	// 	"prefix": "beq",
+	// 	"body": "beq $${1:s}, $${2:t}, ${3:i} ; if ($$1 == $$2) jump to label $3\n",
+	// 	"description": "Branch on Equal",
+	// 	"scope": "source.mips"
+	// },
+	// "bne": {
+	// 	"prefix": "bne",
+	// 	"body": "bne $${1:s}, $${2:t}, ${3:i} ; if ($$1 =! $$2) jump to label $3\n",
+	// 	"description": "Branch on Not Equal",
+	// 	"scope": "source.mips"
+	// },
+	// "jr": {
+	// 	"prefix": "jr",
+	// 	"body": "jr $${1:31} ; pc = $${1:31}",
+	// 	"description": "Jump Register",
+	// 	"scope": "source.mips"
+	// },
+	// "jalr": {
+	// 	"prefix": "jalr",
+	// 	"body": "jalr $${1:s} ; \\$31 = pc and \\$pc = $$1\n",
+	// 	"description": "Jump and Link Register",
+	// 	"scope": "source.mips"
+	// }
+}
