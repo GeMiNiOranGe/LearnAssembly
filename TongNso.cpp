@@ -15,6 +15,5 @@ Loop:
 EndLoop:
 
     cout << iSum << endl;
-    system("pause");
     return 0;
 }
